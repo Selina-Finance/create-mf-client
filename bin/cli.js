@@ -16,11 +16,9 @@ const runCommand = command => {
 const appName = process.argv[2];
 const moduleName = process.argv[3];
 const port = process.argv[4];
-
 const repoName = `mf-${appName}-${moduleName}`;
-
-const gitCheckoutCommand = `git clone --depth 1 https://github.com/Selina-Finance/mf-client-template.git ${repoName}`;
-const installDepsCommand = `cd ${repoName} && yarn install`;
+const gitCheckoutCommand = `git clone --depth 1 --quiet https://github.com/Selina-Finance/mf-client-template.git ${repoName}`;
+const installDepsCommand = `cd ${repoName} && yarn --silent`;
 
 console.log(chalk.bgBlue(`Cloning the repository with name ${repoName}`));
 const checkOut = runCommand(gitCheckoutCommand);
@@ -33,8 +31,8 @@ console.log(chalk.bgBlue('Update package.json '));
 try {
 	replace.sync({
 		files: `${repoName}/package.json`,
-		from: [/##appName##/g, /##moduleName##/g],
-		to: [appName, moduleName],
+		from: [/##appName##/g, /##moduleName##/g, /##port##/g],
+		to: [appName, moduleName, port],
 	});
 }
 catch (error) {
@@ -47,7 +45,7 @@ try {
 	replace.sync({
 		files: `${repoName}/config/config.json`,
 		from: [/##appName##/g, /##moduleName##/g, /##port##/g],
-		to: [appName, moduleName],
+		to: [appName, moduleName, port],
 	});
 }
 catch (error) {
