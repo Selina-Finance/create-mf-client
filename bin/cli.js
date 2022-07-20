@@ -16,6 +16,10 @@ const runCommand = command => {
 const appName = process.argv[2];
 const moduleName = process.argv[3];
 const port = process.argv[4];
+if (!port || !appName || !moduleName) {
+	console.error(chalk.red('Please provide the app name, module name and port npx @selina-finance/create-mf-client <app-name> <module-name> <port>'));
+	process.exit(1);
+}
 const repoName = `mf-${appName}-${moduleName}`;
 const gitCheckoutCommand = `git clone --depth 1 --quiet https://github.com/Selina-Finance/mf-client-template.git ${repoName}`;
 const installDepsCommand = `cd ${repoName} && yarn --silent`;
@@ -40,10 +44,10 @@ catch (error) {
 	process.exit(1);
 }
 
-console.log(chalk.bgBlue('Update config.js'));
+console.log(chalk.bgBlue('Update webpack config.js'));
 try {
 	replace.sync({
-		files: `${repoName}/config/config.json`,
+		files: `${repoName}/webpack_config/config.json`,
 		from: [/##appName##/g, /##moduleName##/g, /##port##/g],
 		to: [appName, moduleName, port],
 	});
