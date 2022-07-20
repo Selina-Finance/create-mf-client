@@ -23,6 +23,7 @@ if (!port || !appName || !moduleName) {
 const repoName = `mf-${appName}-${moduleName}`;
 const gitCheckoutCommand = `git clone --depth 1 --quiet https://github.com/Selina-Finance/mf-client-template.git ${repoName}`;
 const installDepsCommand = `cd ${repoName} && yarn --silent`;
+const removeGit = `cd ${repoName} && rm -rf .git`;
 
 console.log(chalk.bgBlue(`Cloning the repository with name ${repoName}`));
 const checkOut = runCommand(gitCheckoutCommand);
@@ -61,6 +62,13 @@ console.log(chalk.bgBlue('Installing dependencies'));
 const installedDeps = runCommand(installDepsCommand);
 if (!installedDeps) {
 	console.error(chalk.red('Failed to install dependencies'));
+	process.exit(1);
+}
+
+console.log(chalk.bgBlue('Removing git folder'));
+const gitRemoved = runCommand(removeGit);
+if (!gitRemoved) {
+	console.error(chalk.red('Failed to remove .git folder'));
 	process.exit(1);
 }
 
