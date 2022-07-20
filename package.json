@@ -1,6 +1,6 @@
 {
   "name": "@selina-finance/create-mf-client",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "It's create a (client) module for  micro-frontend",
   "bin": "./bin/cli.js",
   "keywords": [],
