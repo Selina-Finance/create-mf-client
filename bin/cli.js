@@ -48,7 +48,7 @@ console.log(chalk.bgBlue('Update webpack config.js'));
 try {
 	replace.sync({
 		files: `${repoName}/webpack_config/config.json`,
-		from: [/##appName##/g, /##moduleName##/g, /##port##/g],
+		from: [/app_name/g, /module_name/g, /port_number/g],
 		to: [appName, moduleName, port],
 	});
 }
