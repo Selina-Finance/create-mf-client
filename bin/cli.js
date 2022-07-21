@@ -36,7 +36,7 @@ console.log(chalk.bgBlue('Update package.json '));
 try {
 	replace.sync({
 		files: `${repoName}/package.json`,
-		from: [/appName/g, /moduleName/g],
+		from: [/app_name/g, /module_name/g],
 		to: [appName, moduleName],
 	});
 }
